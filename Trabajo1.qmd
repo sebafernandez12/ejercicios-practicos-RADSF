@@ -1,0 +1,111 @@
+---
+title: "TRABAJO 1, OPT R"
+author: "Sebastián Fernández"
+format: html
+editor: visual
+---
+
+#INTRODUCCIÓN
+
+La satisfacción con la vida es un componente esencial del bienestar subjetivo, y numerosos estudios han analizado cómo las variables sociodemográficas, como el género, afectan la percepción de la felicidad y el bienestar. Según Pérez, Sánchez y Rodríguez (2022), las diferencias en la satisfacción vital entre hombres y mujeres pueden explicarse por los roles de género socialmente construidos, los cuales impactan las expectativas y experiencias de los individuos.
+
+El estudio de Pérez et al. (2022) encontró que los varones perciben mayor bienestar social que las mujeres, un fenómeno que podría estar relacionado con los privilegios sociales asociados tradicionalmente al rol masculino en la sociedad. En el contexto universitario, los varones tienden a experimentar una mayor autonomía y prestigio social, lo que puede contribuir a su percepción positiva de la vida. Por otro lado, las mujeres enfrentan desafíos adicionales relacionados con las expectativas de género en cuanto a su rol en la sociedad, lo que podría generar una menor satisfacción con la vida.
+
+#PLANTEAMIENTO DEL PROBLEMA
+
+Este estudio destaca la importancia de considerar el género como un factor clave en la satisfacción vital, pues las experiencias de hombres y mujeres se ven influenciadas por las normas sociales que determinan las expectativas sobre sus roles, especialmente en el ámbito académico y profesional. Las mujeres, al estar socialmente encargadas de roles de cuidado y responsabilidades familiares, pueden sentir una mayor presión y menos satisfacción en su vida diaria en comparación con los hombres, quienes tienen más espacio para desarrollarse en el ámbito laboral y público sin los mismos compromisos.
+
+Por lo tanto, el análisis de la relación entre género y satisfacción con la vida se vuelve fundamental para comprender cómo las diferencias en las oportunidades sociales, culturales y económicas afectan la percepción del bienestar. Este planteamiento se centra en investigar cómo el sexo (hombre/mujer) influye en la satisfacción con la vida, tomando como base la Teoría de los Roles de Género, que explica cómo las construcciones sociales de género afectan el bienestar subjetivo de los individuos.
+
+#Procesamiento de datos
+
+##Instalación de paquetes y visualización de la base de datos
+
+```{r}
+# Establecer un repositorio de CRAN antes de intentar instalar paquetes
+options(repos = c(CRAN = "https://cloud.r-project.org")) 
+
+install.packages("pacman")
+library(haven) 
+pacman::p_load(sjlabelled, dplyr, stargazer,sjmisc,summarytools, kableExtra,sjPlot, corrplot, ggplot2) 
+##Cargamos y renombramos la base de datos 
+load("Base de datos EBS 2023.RData") 
+data <- EBS_2023_vp 
+view(data) 
+```
+
+##Recodificamos la variable sg01 (sexo) y luego creamos la tabla descriptiva
+
+```{r}
+## Recodificar la variable sexo (sg01) para asegurarnos de que 1= Hombre y 2 = Mujer
+# Ahora recodificamos la variable sexo
+data$sg01_reco <- ifelse(data$sg01 == 1, 1, 2) 
+
+```
+
+##Creamos la tabla
+
+```{r}
+##Creamos la tabla 
+tabla_sexo <- data %>%
+  group_by(sexo = ifelse(sg01_reco == 1, "Hombre", "Mujer")) %>%
+  summarise(
+    Media_Satisfaccion = mean(a1, na.rm = TRUE),  # Sin redondeo
+    N = n()
+  ) %>%
+  mutate(
+    Porcentaje = (N / sum(N)) * 100  # Calcular el porcentaje sin redondeo
+  ) 
+```
+
+##Mejoramos la presentación y calidad de la tabla descriptiva
+
+```{r}
+tabla_sexo %>%
+  kable(col.names = c("Sexo", "Promedio de Satisfacción con la Vida", "Número de Observaciones", "Porcentaje"),
+        caption = "Tabla 1: Promedio de Satisfacción con la Vida por Sexo",
+        align = c("l", "c", "c", "c")) %>%
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"), # Estilo más claro con líneas alternadas
+    full_width = F,  # No usar todo el ancho
+    position = "center",  # Centrar la tabla
+    font_size = 12  # Tamaño de fuente
+  ) 
+```
+
+##Creamos el grafico de barras para la tabla creada anteriormente
+
+```{r}
+ggplot(tabla_sexo, aes(x = sexo, y = Media_Satisfaccion, fill = sexo)) +
+  geom_bar(stat = "identity", color = "black", show.legend = FALSE) +
+  labs(
+    title = "Promedio de Satisfacción con la Vida por Sexo",
+    x = "Sexo",
+    y = "Promedio de Satisfacción con la Vida"
+  ) +
+  theme_minimal() +
+  scale_fill_manual(values = c("lightblue", "lightcoral")) +  # Colores personalizados
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )  
+```
+
+#Interpretación y análisis de los datos obtenidos
+
+En cuanto al análisis de los datos, la media de satisfacción con la vida para los hombres es de 3.82, mientras que para las mujeres es de 3.75. Aunque la diferencia en los promedios es pequeña (solo 0.07 puntos), se observa que los hombres reportan una ligera mayor satisfacción con la vida en comparación con las mujeres. Esto es consistente con investigaciones previas que han sugerido que los hombres, en muchos contextos, tienden a reportar niveles ligeramente superiores de satisfacción vital debido a diversas variables, como la percepción de mayor estabilidad laboral, menos responsabilidades domésticas, o diferentes expectativas sociales que afectan su bienestar subjetivo.
+
+Respecto al gráfico de barras, se muestra que las barras de los hombres y las mujeres son muy similares en altura. Esto refuerza la idea de que, aunque las mujeres representan una mayor proporción de la muestra, la diferencia en la satisfacción con la vida entre hombres y mujeres es pequeña y no muy significativa visualmente.
+
+Las barras están cerca del valor 4 en la escala (indicado como un nivel de satisfacción "satisfecho" en el gráfico), lo que sugiere que, en general, la satisfacción con la vida de ambos sexos se encuentra en un nivel relativamente alto.
+
+En conclusión, en cuanto a la diferencia de género en satisfacción, a pesar de que los hombres reportan una satisfacción ligeramente más alta que las mujeres, la diferencia es pequeña. Esto podría indicar que, en este caso, el género no tiene un impacto tan significativo en la satisfacción con la vida en esta muestra particular.
+
+Por otro lado,  las mujeres tienen una mayor representación en la muestra, pero esto no necesariamente indica que haya un sesgo en los resultados, ya que el análisis de los promedios de satisfacción muestra que ambos sexos tienen niveles relativamente similares de satisfacción con la vida.
+
+Por último, ambos géneros se encuentran en un nivel alto de satisfacción (alrededor de 3.75 a 3.82 en la escala de 1 a 5), lo que sugiere que, en términos generales, tanto hombres como mujeres tienen una percepción positiva sobre su bienestar.
+
+#Referencias
+
+Pérez, M., Sánchez, J., & Rodríguez, L. (2022). Rol de género y percepción de bienestar y felicidad en estudiantes universitarios. Revista de Psicología Social, 37(1). Recuperado de <https://www.scielo.org.mx/scielo.php?pid=S2007-07052022000100208&script=sci_arttext>
