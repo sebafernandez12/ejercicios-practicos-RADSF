@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="Trabajo1_files/libs/clipboard/clipboard.min.js"></script>
@@ -108,6 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>#INTRODUCCIÓN</p>
+<p><span class="citation" data-cites="efraíngarcía-sánchez2020">(<a href="#ref-efraíngarcía-sánchez2020" role="doc-biblioref">Efraín García-Sánchez et al. 2020</a>)</span></p>
 <p>La satisfacción con la vida es un componente esencial del bienestar subjetivo, y numerosos estudios han analizado cómo las variables sociodemográficas, como el género, afectan la percepción de la felicidad y el bienestar. Según Pérez, Sánchez y Rodríguez (2022), las diferencias en la satisfacción vital entre hombres y mujeres pueden explicarse por los roles de género socialmente construidos, los cuales impactan las expectativas y experiencias de los individuos.</p>
 <p>El estudio de Pérez et al.&nbsp;(2022) encontró que los varones perciben mayor bienestar social que las mujeres, un fenómeno que podría estar relacionado con los privilegios sociales asociados tradicionalmente al rol masculino en la sociedad. En el contexto universitario, los varones tienden a experimentar una mayor autonomía y prestigio social, lo que puede contribuir a su percepción positiva de la vida. Por otro lado, las mujeres enfrentan desafíos adicionales relacionados con las expectativas de género en cuanto a su rol en la sociedad, lo que podría generar una menor satisfacción con la vida.</p>
 <p>#PLANTEAMIENTO DEL PROBLEMA</p>
@@ -128,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>package 'pacman' successfully unpacked and MD5 sums checked
 
 The downloaded binary packages are in
-    C:\Users\Sebastián Fernández\AppData\Local\Temp\RtmpcjozfV\downloaded_packages</code></pre>
+    C:\Users\Sebastián Fernández\AppData\Local\Temp\RtmpAxAtNb\downloaded_packages</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sjlabelled, dplyr, stargazer,sjmisc,summarytools, kableExtra,sjPlot, corrplot, ggplot2) </span>
@@ -235,7 +256,12 @@ The downloaded binary packages are in
 <p>#Referencias</p>
 <p>Pérez, M., Sánchez, J., &amp; Rodríguez, L. (2022). Rol de género y percepción de bienestar y felicidad en estudiantes universitarios. Revista de Psicología Social, 37(1).&nbsp;Recuperado de <a href="https://www.scielo.org.mx/scielo.php?pid=S2007-07052022000100208&amp;script=sci_arttext" class="uri">https://www.scielo.org.mx/scielo.php?pid=S2007-07052022000100208&amp;script=sci_arttext</a></p>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-efraíngarcía-sánchez2020" class="csl-entry" role="listitem">
+Efraín García-Sánchez, Efraín García-Sánchez, Danny Osborne, Danny Osborne, Guillermo B. Willis, Guillermo B. Willis, Rosa Rodríguez-Bailón, and Rosa Rodríguez-Bailón. 2020. <span>“Attitudes Towards Redistribution and the Interplay Between Perceptions and Beliefs about Inequality.”</span> <em>British Journal of Social Psychology</em> 59 (1): 111–36. <a href="https://doi.org/10.1111/bjso.12326">https://doi.org/10.1111/bjso.12326</a>.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

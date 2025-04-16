@@ -1,0 +1,7 @@
+"0","##Cargamos y renombramos la base de datos 
+load(""Base de datos EBS 2023.RData"") 
+"
+"2","Aviso: cannot open compressed file 'Base de datos EBS 2023.RData', probable reason 'No such file or directory'"
+"2","Error en readChar(con, 5L, useBytes = TRUE): 
+  no se puede abrir la conexión
+"

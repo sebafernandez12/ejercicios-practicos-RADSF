@@ -1,0 +1,55 @@
+{
+    "sources": [
+        {
+            "DOI": "10.1111/bjso.12326",
+            "author": [
+                {
+                    "family": "Efraín García-Sánchez"
+                },
+                {
+                    "family": "García-Sánchez",
+                    "given": "Efraín"
+                },
+                {
+                    "family": "Danny Osborne"
+                },
+                {
+                    "family": "Osborne",
+                    "given": "Danny"
+                },
+                {
+                    "family": "Guillermo B. Willis"
+                },
+                {
+                    "family": "Willis",
+                    "given": "Guillermo B."
+                },
+                {
+                    "family": "Rosa Rodríguez-Bailón"
+                },
+                {
+                    "family": "Rodríguez-Bailón",
+                    "given": "Rosa"
+                }
+            ],
+            "container-title": "British Journal of Social Psychology",
+            "id": "efraíngarcía-sánchez2020",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2020,
+                        1,
+                        1
+                    ]
+                ]
+            },
+            "note": "DOI: 10.1111/bjso.12326 MAG ID: 2937283310 PMID: 30977153",
+            "page": "111-136",
+            "title": "Attitudes towards redistribution and the interplay between perceptions and beliefs about inequality",
+            "type": "article-journal",
+            "volume": "59"
+        }
+    ],
+    "project_biblios": []
+}

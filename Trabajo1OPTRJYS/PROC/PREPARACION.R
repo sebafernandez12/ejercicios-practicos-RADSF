@@ -1,0 +1,109 @@
+##Instalamos y cargamos los paquetes necesarios 
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+install.packages("forcats") 
+install.packages("knitr") 
+install.packages("kableExtra") 
+library(forcats) 
+library(dplyr) 
+library(haven) 
+library(knitr) 
+library(kableExtra) 
+library(ggplot2) 
+pacman::p_load(haven,tidyverse,sjlabelled, dplyr, stargazer,sjmisc,summarytools, kableExtra,sjPlot, corrplot, ggplot2)
+##Cargamos y renombramos la base de datos 
+load("Base de datos EBS 2023.RData") 
+data <- EBS_2023_vp  
+##Visualizamos la base de datos
+View(data) 
+##Filtramos la base de datos con las variables que utilizaremos
+data_filtrada <- data %>%
+  select(sg01, a1, a7, ee2) 
+View(data_filtrada) 
+##Pasamos las variables a numericas para posteriormente recodificarlas
+data_filtrada$sg01_num <- as.numeric(zap_labels(data_filtrada$sg01)) 
+data_filtrada$a1_num   <- as.numeric(zap_labels(data_filtrada$a1)) 
+data_filtrada$a7_num   <- as.numeric(zap_labels(data_filtrada$a7)) 
+data_filtrada$ee2_num  <- as.numeric(zap_labels(data_filtrada$ee2)) 
+##Recodificamos las variables 
+data_filtrada <- data_filtrada %>%
+  mutate(
+    sexo = factor(sg01_num, levels = c(1, 2), labels = c("Hombre", "Mujer")),
+    
+    satisfaccion_vida = factor(a1_num,
+                               levels = 1:5,
+                               labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+    
+    satisfaccion_ingresos = factor(a7_num,
+                                   levels = 1:5,
+                                   labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+    
+    interes_estudios = factor(ee2_num,
+                              levels = c(1, 2),
+                              labels = c("Sí", "No"))
+  ) 
+##Verificamos que se hayan recodificado correctamente 
+str(data_filtrada) 
+##Tabla 1 sexo
+tabla_sexo <- data_filtrada %>%
+  count(sexo) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(Sexo = sexo, Frecuencia = n) 
+
+kable(tabla_sexo, format = "html", caption = "Distribución de la muestra por sexo") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), 
+                full_width = F, position = "center") 
+##Tabla 2 Satisfacción con la vida 
+tabla_vida <- data_filtrada %>%
+  count(satisfaccion_vida) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(`Satisfacción con la vida` = satisfaccion_vida, Frecuencia = n) 
+
+kable(tabla_vida, format = "html", caption = "Distribución de satisfacción con la vida") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F, position = "center") 
+#Tabla 3 Satisfacción con el ingreso
+tabla_ingresos <- data_filtrada %>%
+  count(satisfaccion_ingresos) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(`Satisfacción con los ingresos` = satisfaccion_ingresos, Frecuencia = n) 
+
+kable(tabla_ingresos, format = "html", caption = "Distribución de satisfacción con los ingresos") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F, position = "center") 
+##Tabla 4 Intereses por seguir estudiando 
+tabla_estudios <- data_filtrada %>%
+  count(interes_estudios) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(`Interés por estudiar` = interes_estudios, Frecuencia = n) 
+
+kable(tabla_estudios, format = "html", caption = "Distribución de interés por estudiar") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F, position = "center") 
+##Graficamos la variable satis_vida por sexo
+ggplot(data_filtrada, aes(x = satisfaccion_vida, fill = sexo)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Satisfacción con la vida según sexo",
+       x = "Nivel de satisfacción con la vida",
+       y = "Frecuencia",
+       fill = "Sexo") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1)) 
+##Graficamos la variable interes por seguir estudiando por sexo
+ggplot(data_filtrada, aes(x = interes_estudios, fill = sexo)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Interés en continuar estudios en los próximos 5 años",
+       x = "Respuesta",
+       y = "Frecuencia",
+       fill = "Sexo") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5)) 
+##Graficamos la variable satis_ingreso por sexo
+ggplot(data_filtrada, aes(x = satisfaccion_ingresos, fill = sexo)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Satisfacción con los ingresos según sexo",
+       x = "Nivel de satisfacción",
+       y = "Frecuencia",
+       fill = "Sexo") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1)) 
+

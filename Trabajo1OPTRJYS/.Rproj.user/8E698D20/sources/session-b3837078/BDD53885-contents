@@ -1,0 +1,263 @@
+---
+title: "Trabajo1JosefaCarrilloySebastianFernandez"
+format: html
+editor: visual
+bibliography: "C:/Users/Sebastián Fernández/OneDrive/Desktop/OPT R, TRABAJOS/ejercicios-practicos-RADSF/Trabajo1OPTRJYS/references.bib"
+link-citations: true
+---
+
+## **Género y bienestar subjetivo en Chile: un análisis exploratorio sobre satisfacción vital, percepción económica y aspiraciones educativas**
+
+### Introducción
+
+En las últimas décadas, el concepto de bienestar ha dejado de limitarse a dimensiones objetivas como los ingresos o el acceso a servicios, y ha incorporado cada vez más aspectos subjetivos que permiten comprender cómo las personas evalúan su calidad de vida. En ese marco, la noción de bienestar subjetivo ha ganado relevancia como una herramienta para diagnosticar desigualdades no solo materiales, sino también simbólicas, emocionales y proyectivas. Este trabajo se sitúa en esa línea y busca explorar cómo el bienestar subjetivo se expresa de manera diferenciada entre hombres y mujeres en Chile, utilizando como fuente de datos la Encuesta de Bienestar Social 2023.
+
+La relevancia del problema no radica únicamente en el reconocimiento de las desigualdades estructurales de género en Chile, sino en el aporte específico que una mirada sociológica puede hacer al conectar dichas desigualdades con las formas en que las personas experimentan su realidad cotidiana. Desde esta disciplina, el género se entiende no como una categoría estática, sino como una construcción social que organiza la distribución de recursos, el acceso al poder y la subjetividad misma. Así, estudiar las diferencias de género en la satisfacción con la vida, la percepción de ingresos y las aspiraciones educativas permite observar cómo las estructuras de dominación se inscriben en la vida emocional, económica y simbólica de las personas.
+
+Diversos estudios han señalado que, aunque las mujeres suelen tener peores indicadores objetivos de salud y economía, tienden a reportar niveles más altos de satisfacción subjetiva en ciertos dominios, especialmente en etapas más avanzadas del ciclo vital [@gallardo-peralta2018]. Esta aparente paradoja evidencia que el bienestar no puede entenderse solo en función de lo material, sino también desde las relaciones, expectativas y significados que las personas otorgan a su experiencia.
+
+Asimismo, las brechas salariales siguen siendo una expresión concreta de la desigualdad estructural de género. A pesar de los avances normativos, persiste una marcada desigualdad en los ingresos percibidos por hombres y mujeres por trabajos equivalentes, lo cual incide directamente en su percepción de suficiencia económica y bienestar [@riveroevia2024].
+
+En cuanto a las aspiraciones educativas, investigaciones sobre mujeres en carreras tradicionalmente masculinizadas, como la ingeniería, han mostrado que las motivaciones para continuar estudiando suelen vincularse con la necesidad de superar barreras estructurales y culturales, así como con la búsqueda de movilidad social y autonomía personal [@jiménez2019] Este tipo de interés proyectivo puede ser interpretado como una forma de agencia frente a contextos marcados por la desigualdad de oportunidades.
+
+El concepto central que se abordará es bienestar subjetivo, entendido como el conjunto de percepciones que una persona tiene respecto a su situación vital, emocional y económica, incluyendo su satisfacción con la vida, su percepción de suficiencia material y su proyección en términos de formación futura. Este enfoque integra tanto dimensiones cognitivas como afectivas, permitiendo una lectura compleja de las desigualdades sociales.
+
+El presente estudio se orienta por la siguiente hipótesis central:
+
+Las mujeres presentan menores niveles de satisfacción con la vida e ingresos, pero mayor interés por continuar estudios, en comparación con los hombres.
+
+Esta hipótesis se articula con una perspectiva que entiende las diferencias de género no como atributos individuales, sino como efectos de procesos estructurales. El interés por seguir estudiando, por ejemplo, puede interpretarse como una forma de agencia frente a contextos marcados por la desigualdad. Asimismo, la menor satisfacción con los ingresos puede reflejar no solo ingresos más bajos, sino también una experiencia más aguda de precariedad, expectativas frustradas o doble carga laboral.
+
+### Metodología y selección de variables
+
+1.  **Diseño del estudio**
+
+Este estudio adopta un enfoque cuantitativo de tipo exploratorio, con un diseño transversal basado en el análisis secundario de datos provenientes de la Encuesta de Bienestar Social 2023, desarrollada por el Estado de Chile. La unidad de análisis corresponde a personas mayores de 18 años encuestadas en el instrumento, en tanto sujetos capaces de expresar percepciones sobre su bienestar y sus expectativas educativas.
+
+El objetivo no es establecer relaciones causales, sino identificar patrones de diferenciación por sexo en variables asociadas al bienestar subjetivo. Se utiliza el software RStudio para el procesamiento, recodificación y análisis de los datos.
+
+2.  Variables seleccionadas
+
+**Variable independiente principal:**
+
+Sexo (sg01) –\> Categorica nominal
+
+Categorías: 1 = Hombre; 2 = Mujer
+
+Dicha variable permite segmentar la muestra para comparar los niveles de bienestar subjetivo y proyección educativa.
+
+**Variables dependientes:**
+
+**Satisfacción con la vida (a1)**
+
+Tipo: ordinal
+
+Categorías: 1 = Muy insatisfecho(a), 2 = Insatisfecho(a), 3 = Indiferente, 4 = Satisfecho(a), 5 = Muy satisfecho(a)
+
+Representa la percepción global que las personas tienen sobre su calidad de vida.
+
+**Satisfacción con los ingresos (a7)**
+
+Tipo: ordinal
+
+Categorías: 1 = Muy insatisfecho(a), 2 = Insatisfecho(a), 3 = Indiferente, 4 = Satisfecho(a), 5 = Muy satisfecho(a)
+
+Esta variable se asocia a la percepción de suficiencia económica, más allá del ingreso real.
+
+**Interés por continuar estudios (ee2)**
+
+Tipo: categórica dicotómica
+
+Categorías: 1 = Sí, 2 = No
+
+Mide el deseo expresado por los encuestados de continuar su formación en los próximos cinco años, lo cual se interpreta como una forma de agencia proyectiva y búsqueda de movilidad.
+
+### Procesamiento de datos
+
+##Instalamos y cargamos los paquetes necesarios
+
+```{r}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+install.packages("forcats") 
+install.packages("knitr") 
+install.packages("kableExtra") 
+library(forcats) 
+library(dplyr) 
+library(haven) 
+library(knitr) 
+library(kableExtra) 
+library(ggplot2) 
+pacman::p_load(haven,tidyverse,sjlabelled, dplyr, stargazer,sjmisc,summarytools, kableExtra,sjPlot, corrplot, ggplot2) 
+##Cargamos y renombramos la base de datos 
+load("C:/Users/Sebastián Fernández/OneDrive/Desktop/OPT R, TRABAJOS/ejercicios-practicos-RADSF/Trabajo1OPTRJYS/Base de datos EBS 2023.RData") 
+data <- EBS_2023_vp  
+##Visualizamos la base de datos
+View(data) 
+```
+
+##Filtramos la base de datos con las variables que utilizaremos
+
+```{r}
+data_filtrada <- data %>%
+  select(sg01, a1, a7, ee2) 
+View(data_filtrada) 
+```
+
+##Pasamos las variables a numericas para posteriormente recodificarlas
+
+```{r}
+data_filtrada$sg01_num <- as.numeric(zap_labels(data_filtrada$sg01)) 
+data_filtrada$a1_num   <- as.numeric(zap_labels(data_filtrada$a1))  
+data_filtrada$a7_num   <- as.numeric(zap_labels(data_filtrada$a7)) 
+data_filtrada$ee2_num  <- as.numeric(zap_labels(data_filtrada$ee2)) 
+```
+
+##Recodificamos las variables
+
+```{r}
+data_filtrada <- data_filtrada %>%
+  mutate(
+    sexo = factor(sg01_num, levels = c(1, 2), labels = c("Hombre", "Mujer")),
+    
+    satisfaccion_vida = factor(a1_num,
+                               levels = 1:5,
+                               labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+    
+    satisfaccion_ingresos = factor(a7_num,
+                                   levels = 1:5,
+                                   labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+    
+    interes_estudios = factor(ee2_num,
+                              levels = c(1, 2),
+                              labels = c("Sí", "No"))
+  ) 
+##Verificamos que se hayan recodificado correctamente 
+str(data_filtrada) 
+```
+
+##Creamos la tabla 1 –\> sexo
+
+```{r}
+##Tabla 1 sexo
+tabla_sexo <- data_filtrada %>%
+  count(sexo) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(Sexo = sexo, Frecuencia = n) 
+
+kable(tabla_sexo, format = "html", caption = "Distribución de la muestra por sexo") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), 
+                full_width = F, position = "center") 
+```
+
+##Creamos la tabla 2 –\> Satisfacción con la vida
+
+```{r}
+tabla_vida <- data_filtrada %>%
+  count(satisfaccion_vida) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(`Satisfacción con la vida` = satisfaccion_vida, Frecuencia = n) 
+
+kable(tabla_vida, format = "html", caption = "Distribución de satisfacción con la vida") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F, position = "center") 
+```
+
+##Creamos la tabla 3 –\> Satisfacción con el ingreso
+
+```{r}
+#Tabla 3 Satisfacción con el ingreso
+tabla_ingresos <- data_filtrada %>%
+  count(satisfaccion_ingresos) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(`Satisfacción con los ingresos` = satisfaccion_ingresos, Frecuencia = n) 
+
+kable(tabla_ingresos, format = "html", caption = "Distribución de satisfacción con los ingresos") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F, position = "center") 
+```
+
+##Creamos la tabla 4 –\> Interes por seguir estudiando
+
+```{r}
+tabla_estudios <- data_filtrada %>%
+  count(interes_estudios) %>%
+  mutate(Porcentaje = round(n / sum(n) * 100, 1)) %>%
+  rename(`Interés por estudiar` = interes_estudios, Frecuencia = n) 
+
+kable(tabla_estudios, format = "html", caption = "Distribución de interés por estudiar") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), 
+                full_width = F, position = "center") 
+```
+
+##Graficamos la variable satis_vida por sexo
+
+```{r}
+ggplot(data_filtrada, aes(x = satisfaccion_vida, fill = sexo)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Satisfacción con la vida según sexo",
+       x = "Nivel de satisfacción con la vida",
+       y = "Frecuencia",
+       fill = "Sexo") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1)) 
+```
+
+##Graficamos la variable interes por seguir estudiando por sexo
+
+```{r}
+ggplot(data_filtrada, aes(x = interes_estudios, fill = sexo)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Interés en continuar estudios en los próximos 5 años",
+       x = "Respuesta",
+       y = "Frecuencia",
+       fill = "Sexo") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5)) 
+```
+
+##Graficamos la variable satis_ingreso por sexo
+
+```{r}
+ggplot(data_filtrada, aes(x = satisfaccion_ingresos, fill = sexo)) +
+  geom_bar(position = "dodge") +
+  labs(title = "Satisfacción con los ingresos según sexo",
+       x = "Nivel de satisfacción",
+       y = "Frecuencia",
+       fill = "Sexo") +
+  theme_minimal(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 20, hjust = 1)) 
+```
+
+### Resultados
+
+Tabla 1 —\> Distribución de la muestra por sexo
+
+![](images/Tabla_sexo.png){width="404"}
+
+La muestra está compuesta por un 59,4% de mujeres y un 40,6% de hombres. Esta sobrerrepresentación femenina puede influir en los resultados generales de percepción de bienestar y aspiraciones educativas.
+
+#### Tabla y gráfico de satisfacción con la vida según sexo
+
+![](images/Tabla_satisvida.png){width="342"}
+
+![](images/Grafico_satisvida_sexo.png){width="381"}
+
+La mayoría de las personas declara estar “satisfecha” (57,1%) o “muy satisfecha” (22,1%) con su vida. Al observar el gráfico, se evidencia que las mujeres presentan una mayor proporción de respuestas en la categoría “muy satisfecha”, mientras que los hombres se concentran más en la categoría “satisfecho”. Las diferencias en las categorías más bajas son menores, lo que sugiere una distribución similar del malestar subjetivo entre ambos sexos.
+
+#### Tabla y gráfico de satisfacción con el ingreso según sexo
+
+![](images/Tabla_satis_ingreso.png){width="330"}
+
+![]()
+
+![](images/Grafico_satisingreso_sexo-01.png){width="345"}
+
+Los niveles de insatisfacción con los ingresos son altos: el 35% se declara “insatisfecho” y un 11,7% “muy insatisfecho”. En el gráfico se aprecia que las mujeres declaran insatisfacción con mayor frecuencia que los hombres, y también tienen una menor proporción en la categoría “muy satisfecha”. Esto sugiere una mayor percepción de precariedad económica entre las mujeres, lo cual se alinea con la literatura sobre desigualdad salarial de género.
+
+#### Tabla y gráfico de interes por seguir estudiando según sexo
+
+![](images/Tabla_seguir_estudiando.png){width="333"}
+
+![](images/Gráfico_seguirestu_sexo.png){width="342"}
+
+La distribución está relativamente equilibrada: 48,5% declara interés por seguir estudiando y 50,9% no. Sin embargo, el gráfico muestra que las mujeres expresan más interés que los hombres en continuar estudios. Lo anterior podría interpretarse como una señal de mayor motivación por mejorar sus condiciones de vida o superar barreras estructurales a través de la educación.
