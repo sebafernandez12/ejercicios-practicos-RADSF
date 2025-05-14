@@ -1,4 +1,103 @@
 {
-    "sources": [],
+    "sources": [
+        {
+            "DOI": "10.4067/S0718-65682018000100153",
+            "URL": "http://www.scielo.cl/scielo.php?script=sci_arttext&pid=S0718-65682018000100153&lng=en&nrm=iso&tlng=en",
+            "author": [
+                {
+                    "family": "Gallardo-Peralta",
+                    "given": "Lorena"
+                },
+                {
+                    "family": "Córdova Jorquera",
+                    "given": "Isabel"
+                },
+                {
+                    "family": "Piña Morán",
+                    "given": "Marcelo"
+                },
+                {
+                    "family": "Urrutia Quiroz",
+                    "given": "Beatriz"
+                }
+            ],
+            "container-title": "Polis (Santiago)",
+            "id": "gallardo-peralta2018",
+            "issue": "49",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        5
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "153-175",
+            "title": "Diferencias de género en salud y calidad de vida en personas mayores del norte de Chile",
+            "type": "article-journal",
+            "volume": "17"
+        },
+        {
+            "DOI": "10.55555/IS.27.563",
+            "URL": "http://intersticiosociales.com/index.php/is/article/view/563",
+            "author": [
+                {
+                    "family": "Rivero Evia",
+                    "given": "Jorge"
+                }
+            ],
+            "container-title": "Intersticios Sociales",
+            "id": "riveroevia2024",
+            "issue": "27",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024,
+                        3,
+                        1
+                    ]
+                ]
+            },
+            "page": "390-408",
+            "title": "¿A trabajo igual, salario igual? La brecha salarial de género en méxico: Políticas públicas para su disminución",
+            "title-short": "¿A trabajo igual, salario igual? La brecha salarial de género en méxico",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.4067/S0718-07642019000400209",
+            "URL": "http://www.scielo.cl/scielo.php?script=sci_arttext&pid=S0718-07642019000400209&lng=en&nrm=iso&tlng=en",
+            "author": [
+                {
+                    "family": "Jiménez",
+                    "given": "Claudia A."
+                },
+                {
+                    "family": "Jones",
+                    "given": "Eduardo A."
+                },
+                {
+                    "family": "Vidal",
+                    "given": "Cristian L."
+                }
+            ],
+            "container-title": "Información tecnológica",
+            "id": "jiménez2019",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        8
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "209-216",
+            "title": "Estudio Exploratorio de Factores que Influyen en la Decisión de la Mujer para Estudiar Ingeniería en Chile",
+            "type": "article-journal",
+            "volume": "30"
+        }
+    ],
     "project_biblios": []
 }

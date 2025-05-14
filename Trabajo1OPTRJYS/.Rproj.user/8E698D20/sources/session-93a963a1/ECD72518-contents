@@ -1,15 +1,20 @@
 ##Instalamos y cargamos los paquetes necesarios 
 load("Base de datos EBS 2023.RData") 
-options(repos = c(CRAN = "https://cloud.r-project.org"))
+options(repos = c(CRAN = "https://cloud.r-project.org")) 
 install.packages("forcats") 
 install.packages("knitr") 
 install.packages("kableExtra") 
+install.packages("labelled") 
+install.packages("ggcorrplot") 
+library(ggcorrplot) 
 library(forcats) 
 library(dplyr) 
 library(haven) 
 library(knitr) 
 library(kableExtra) 
 library(ggplot2) 
+library(labelled) 
+library(corrplot) 
 pacman::p_load(haven,tidyverse,sjlabelled, dplyr, stargazer,sjmisc,summarytools, kableExtra,sjPlot, corrplot, ggplot2)
 ##Cargamos y renombramos la base de datos 
 load("Base de datos EBS 2023.RData") 
@@ -21,10 +26,22 @@ data_filtrada <- data %>%
   select(sg01, a1, a7, ee2) 
 View(data_filtrada) 
 ##Pasamos las variables a numericas para posteriormente recodificarlas
-data_filtrada$sg01_num <- as.numeric(zap_labels(data_filtrada$sg01)) 
-data_filtrada$a1_num   <- as.numeric(zap_labels(data_filtrada$a1)) 
-data_filtrada$a7_num   <- as.numeric(zap_labels(data_filtrada$a7)) 
-data_filtrada$ee2_num  <- as.numeric(zap_labels(data_filtrada$ee2)) 
+data_filtrada <- data_filtrada %>%
+  mutate(
+    sg01_num = as_numeric(sg01),
+    a1_num   = as_numeric(a1),
+    a7_num   = as_numeric(a7),
+    ee2_num  = as_numeric(ee2)
+  ) 
+##Filtramos antes de recodificar
+data_filtrada <- data_filtrada %>%
+  filter(
+    sg01_num %in% c(1, 2),
+    a1_num %in% 1:5,
+    a7_num %in% 1:5,
+    ee2_num %in% c(1, 2)
+  ) 
+
 ##Recodificamos las variables 
 data_filtrada <- data_filtrada %>%
   mutate(
@@ -32,11 +49,16 @@ data_filtrada <- data_filtrada %>%
     
     satisfaccion_vida = factor(a1_num,
                                levels = 1:5,
-                               labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+                               labels = c("Muy insatisfecho", "Insatisfecho",
+                                          "Indiferente", "Satisfecho", 
+                                          "Muy satisfecho")),
     
     satisfaccion_ingresos = factor(a7_num,
                                    levels = 1:5,
-                                   labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+                                   labels = c("Muy insatisfecho", "Insatisfecho"
+                                              ,
+                                             "Indiferente", "Satisfecho", 
+                                              "Muy satisfecho")),
     
     interes_estudios = factor(ee2_num,
                               levels = c(1, 2),
@@ -107,4 +129,49 @@ ggplot(data_filtrada, aes(x = satisfaccion_ingresos, fill = sexo)) +
        fill = "Sexo") +
   theme_minimal(base_size = 12) +
   theme(axis.text.x = element_text(angle = 20, hjust = 1)) 
+###Análisis de correlación entre satisfacción de vida, ingreso e
+###interes por seguir estudiando
+# Seleccionamos las variables para la correlación
+satis_cor <- data_filtrada %>%
+  select(a1_num, a7_num, ee2_num) 
+
+#Calculamos la matriz
+cor_matrix <- cor(satis_cor, use = "complete.obs", method = "pearson") 
+
+# Renombrar las filas y columnas para que tengan nombres más claros
+colnames(cor_matrix) <- c("Satis_Vida", "Satis_Ingresos", "Interés_Estudiar") 
+rownames(cor_matrix) <- c("Satis_Vida", "Satis_Ingresos", "Interés_Estudiar") 
+##Gráficamos
+ggcorrplot(cor_matrix,
+           lab = TRUE,
+           lab_size = 4,
+           type = "lower",
+           colors = c("red", "white", "blue"),
+           title = "Matriz de Correlación entre Variables de Satisfacción",
+           ggtheme = theme_minimal() +
+             theme(plot.title = element_text(hjust = 0.5))) 
+##Indice sumativo entre satisfacción con la vida e ingresos 
+data_filtrada <- data_filtrada %>%
+  mutate(indice_satisfaccion = a1_num + a7_num) 
+
+#Resumen del indice
+summary(data_filtrada$indice_satisfaccion) 
+
+#Gráficos el indice
+ggplot(data_filtrada, aes(x = indice_satisfaccion)) +
+  geom_histogram(binwidth = 1, fill = "dodgerblue", color = "black", boundary = 0) +
+  scale_x_continuous(breaks = seq(2, 10, by = 1)) +
+  labs(
+    title = "Índice de satisfacción subjetiva",
+    x = "Índice de satisfacción (vida + ingresos)",
+    y = "Frecuencia"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 13),  # <- más pequeño y centrado
+    axis.title.x = element_text(margin = margin(t = 10)),
+    axis.title.y = element_text(margin = margin(r = 10))
+  ) 
+
+
 

@@ -77,17 +77,16 @@ Mide el deseo expresado por los encuestados de continuar su formación en los pr
 ##Instalamos y cargamos los paquetes necesarios
 
 ```{r}
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-install.packages("forcats") 
-install.packages("knitr") 
-install.packages("kableExtra") 
+library(ggcorrplot) 
 library(forcats) 
 library(dplyr) 
 library(haven) 
 library(knitr) 
 library(kableExtra) 
 library(ggplot2) 
-pacman::p_load(haven,tidyverse,sjlabelled, dplyr, stargazer,sjmisc,summarytools, kableExtra,sjPlot, corrplot, ggplot2) 
+library(labelled) 
+library(corrplot) 
+pacman::p_load(haven,tidyverse,sjlabelled, dplyr, stargazer,sjmisc,summarytools,kableExtra,sjPlot,corrplot,ggplot2)
 ##Cargamos y renombramos la base de datos 
 load("C:/Users/Sebastián Fernández/OneDrive/Desktop/OPT R, TRABAJOS/ejercicios-practicos-RADSF/Trabajo1OPTRJYS/Base de datos EBS 2023.RData") 
 data <- EBS_2023_vp  
@@ -106,10 +105,23 @@ View(data_filtrada)
 ##Pasamos las variables a numericas para posteriormente recodificarlas
 
 ```{r}
-data_filtrada$sg01_num <- as.numeric(zap_labels(data_filtrada$sg01)) 
-data_filtrada$a1_num   <- as.numeric(zap_labels(data_filtrada$a1))  
-data_filtrada$a7_num   <- as.numeric(zap_labels(data_filtrada$a7)) 
-data_filtrada$ee2_num  <- as.numeric(zap_labels(data_filtrada$ee2)) 
+data_filtrada <- data_filtrada %>%
+  mutate(
+    sg01_num = as_numeric(sg01),
+    a1_num   = as_numeric(a1),
+    a7_num   = as_numeric(a7),
+    ee2_num  = as_numeric(ee2)
+  ) 
+```
+
+```{r}
+data_filtrada <- data_filtrada %>%
+  filter(
+    sg01_num %in% c(1, 2),
+    a1_num %in% 1:5,
+    a7_num %in% 1:5,
+    ee2_num %in% c(1, 2)
+  ) 
 ```
 
 ##Recodificamos las variables
@@ -121,11 +133,16 @@ data_filtrada <- data_filtrada %>%
     
     satisfaccion_vida = factor(a1_num,
                                levels = 1:5,
-                               labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+                               labels = c("Muy insatisfecho", "Insatisfecho",
+                                          "Indiferente", "Satisfecho", 
+                                          "Muy satisfecho")),
     
     satisfaccion_ingresos = factor(a7_num,
                                    levels = 1:5,
-                                   labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+                                   labels = c("Muy insatisfecho", "Insatisfecho"
+                                              ,
+                                             "Indiferente", "Satisfecho", 
+                                              "Muy satisfecho")),
     
     interes_estudios = factor(ee2_num,
                               levels = c(1, 2),
@@ -228,6 +245,73 @@ ggplot(data_filtrada, aes(x = satisfaccion_ingresos, fill = sexo)) +
   theme(axis.text.x = element_text(angle = 20, hjust = 1)) 
 ```
 
+##Analisis de correlación entre variables de satisfacción
+
+###Seleccionamos las variables para la correlación
+
+```{r}
+satis_cor <- data_filtrada %>%
+  select(a1_num, a7_num, ee2_num) 
+```
+
+#Calculamos la matriz
+
+```{r}
+cor_matrix <- cor(satis_cor, use = "complete.obs", method = "pearson") 
+```
+
+##Renombrar las filas y columnas para que tengan nombres más claros
+
+```{r}
+colnames(cor_matrix) <- c("Satis_Vida", "Satis_Ingresos", "Interés_Estudiar") 
+rownames(cor_matrix) <- c("Satis_Vida", "Satis_Ingresos", "Interés_Estudiar") 
+```
+
+##Gráficamos
+
+```{r}
+ggcorrplot(cor_matrix,
+           lab = TRUE,
+           lab_size = 4,
+           type = "lower",
+           colors = c("red", "white", "blue"),
+           title = "Matriz de Correlación entre Variables de Satisfacción",
+           ggtheme = theme_minimal() +
+             theme(plot.title = element_text(hjust = 0.5))) 
+```
+
+##Indice sumativo entre satisfacción con la vida e ingresos
+
+```{r}
+data_filtrada <- data_filtrada %>%
+  mutate(indice_satisfaccion = a1_num + a7_num) 
+```
+
+#Resumen del indice
+
+```{r}
+summary(data_filtrada$indice_satisfaccion) 
+```
+
+##Graficamos
+
+```{r}
+ggplot(data_filtrada, aes(x = indice_satisfaccion)) +
+  geom_histogram(binwidth = 1, fill = "dodgerblue", color = "black", boundary = 0) +
+  scale_x_continuous(breaks = seq(2, 10, by = 1)) +
+  labs(
+    title = "Índice de satisfacción subjetiva",
+    x = "Índice de satisfacción (vida + ingresos)",
+    y = "Frecuencia"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 13),  
+    axis.title.x = element_text(margin = margin(t = 10)),
+    axis.title.y = element_text(margin = margin(r = 10))
+  ) 
+```
+
 ### Resultados
 
 Tabla 1 —\> Distribución de la muestra por sexo
@@ -261,3 +345,31 @@ Los niveles de insatisfacción con los ingresos son altos: el 35% se declara “
 ![](images/Gráfico_seguirestu_sexo.png){width="342"}
 
 La distribución está relativamente equilibrada: 48,5% declara interés por seguir estudiando y 50,9% no. Sin embargo, el gráfico muestra que las mujeres expresan más interés que los hombres en continuar estudios. Lo anterior podría interpretarse como una señal de mayor motivación por mejorar sus condiciones de vida o superar barreras estructurales a través de la educación.
+
+#### Interpretación de Matriz de Correlación
+
+![](images/MATRIZ DE CORRELACIÓN, OFICIAL.png){width="424"}
+
+1.  **Correlación entre satisfacción con la vida y satisfacción con los ingresos\
+    **Valor: 0.34**\
+    **Interpretación: Existe una correlación positiva moderada, lo que indica que a mayor satisfacción con los ingresos, suele haber también mayor satisfacción con la vida. No es una relación fuerte, pero si demuestra consistencia.
+
+2.  **Correlación entre satisfacción con la vida e interés por seguir estudiando\
+    **Valor: -0.06**\
+    **Interpretación: Hay una correlación ligeramente negativa pero muy débil, lo que sugiere que quienes están más satisfechos con su vida podrían tener un poco menos de interés por seguir estudiando, aunque esta relación es prácticamente inexistente desde el punto de vista estadístico.
+
+3.  **Correlación entre satisfacción con los ingresos e interés por estudiar\
+    **Valor: 0.00**\
+    **Interpretación: No existe una relación significativa entre estas dos variables, lo que implica que la satisfacción con el ingreso actual no se relaciona con la motivación o deseo de continuar estudiando. \
+
+    ### Indice sumativo de satisfacción subjetiva 
+
+    ### ![](images/INDICE SUMATIVO, OFICIAL.png){width="432"}
+
+El gráfico corresponde a un histograma que representa cómo se distribuyen los valores del índice de satisfacción subjetiva, el cual tiene un rango teórico de 2 a 10 (donde 2 es el mínimo posible y 10 el máximo).
+
+La distribución está centrada entre 5 y 8, lo cual indicia que la mayoría de las personas se concentra en los valores intermedios-altos del índice. Los valores más frecuentes son 5 y 7, lo que sugiere una percepción general moderadamente positiva del bienestar subjetivo.
+
+Por otro lado, aunque la curva no es perfectamente simétrica, no hay un sesgo fuerte hacia extremos bajos o altos. Esto indica que la mayoría de las personas no se encuentra ni muy insatisfecha ni completamente satisfecha, sino en un punto medio con cierta inclinación hacia niveles más positivos.
+
+Por último, en cuanto a los casos extremos, se pueden apreciar muy pocos. Los casos con valores de 2, 3 o 10, evidencia que tanto la insatisfacción extrema como la satisfacción máxima no son comunes en esta muestra.
