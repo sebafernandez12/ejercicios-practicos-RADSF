@@ -348,7 +348,7 @@ La distribución está relativamente equilibrada: 48,5% declara interés por seg
 
 #### Interpretación de Matriz de Correlación
 
-![](images/MATRIZ DE CORRELACIÓN, OFICIAL.png){width="424"}
+![](images/MATRIZ%20DE%20CORRELACIÓN,%20OFICIAL.png){width="424"}
 
 1.  **Correlación entre satisfacción con la vida y satisfacción con los ingresos\
     **Valor: 0.34**\
@@ -360,11 +360,11 @@ La distribución está relativamente equilibrada: 48,5% declara interés por seg
 
 3.  **Correlación entre satisfacción con los ingresos e interés por estudiar\
     **Valor: 0.00**\
-    **Interpretación: No existe una relación significativa entre estas dos variables, lo que implica que la satisfacción con el ingreso actual no se relaciona con la motivación o deseo de continuar estudiando. \
+    **Interpretación: No existe una relación significativa entre estas dos variables, lo que implica que la satisfacción con el ingreso actual no se relaciona con la motivación o deseo de continuar estudiando.\
 
-    ### Indice sumativo de satisfacción subjetiva 
+    ### Indice sumativo de satisfacción subjetiva
 
-    ### ![](images/INDICE SUMATIVO, OFICIAL.png){width="432"}
+    ### ![](images/INDICE%20SUMATIVO,%20OFICIAL.png){width="432"}
 
 El gráfico corresponde a un histograma que representa cómo se distribuyen los valores del índice de satisfacción subjetiva, el cual tiene un rango teórico de 2 a 10 (donde 2 es el mínimo posible y 10 el máximo).
 

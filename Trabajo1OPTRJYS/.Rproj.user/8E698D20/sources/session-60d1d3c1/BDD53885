@@ -1,9 +1,9 @@
 {
     "id": "BDD53885",
-    "path": "C:/Users/Sebastián Fernández/OneDrive/Desktop/OPT R, TRABAJOS/ejercicios-practicos-RADSF/Trabajo1OPTRJYS/PROC/Trabajo1JYS.qmd",
-    "project_path": "PROC/Trabajo1JYS.qmd",
+    "path": "C:/Users/Sebastián Fernández/OneDrive/Desktop/OPT R, TRABAJOS/ejercicios-practicos-RADSF/Trabajo1OPTRJYS/PROC/Trabajo1JoseySeba.qmd",
+    "project_path": "PROC/Trabajo1JoseySeba.qmd",
     "type": "quarto_markdown",
-    "hash": "568454587",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1744731199205.0,
@@ -19,14 +19,14 @@
         "scrollLine": "0",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "14919:9552.12109375"
+        "rmdVisualModeLocation": "2:0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1747240593,
+    "lastKnownWriteTime": 1747241164,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1747240593311,
+    "last_content_update": 1747241164917,
     "read_only": false,
     "read_only_alternatives": []
 }

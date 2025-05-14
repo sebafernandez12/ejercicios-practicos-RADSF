@@ -49,11 +49,16 @@ data_filtrada <- data_filtrada %>%
     
     satisfaccion_vida = factor(a1_num,
                                levels = 1:5,
-                               labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+                               labels = c("Muy insatisfecho", "Insatisfecho",
+                                          "Indiferente", "Satisfecho", 
+                                          "Muy satisfecho")),
     
     satisfaccion_ingresos = factor(a7_num,
                                    levels = 1:5,
-                                   labels = c("Muy insatisfecho", "Insatisfecho", "Indiferente", "Satisfecho", "Muy satisfecho")),
+                                   labels = c("Muy insatisfecho", "Insatisfecho"
+                                              ,
+                                             "Indiferente", "Satisfecho", 
+                                              "Muy satisfecho")),
     
     interes_estudios = factor(ee2_num,
                               levels = c(1, 2),
