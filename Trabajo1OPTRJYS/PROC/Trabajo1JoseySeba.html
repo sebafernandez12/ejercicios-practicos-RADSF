@@ -638,6 +638,165 @@ Adjuntando el paquete: 'kableExtra'</code></pre>
 </div>
 </div>
 </div>
+<p>##Estimamos modelos de regresión lineal y modelos de regresión lineal multiple</p>
+<p>##Modelo 1 –&gt; Regresión lineal simple</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>modelo_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(a1_num <span class="sc">~</span> a7_num, <span class="at">data =</span> data_filtrada)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Modelo 2 –&gt; Regresión lineal multiple</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>modelo_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(a1_num <span class="sc">~</span> a7_num <span class="sc">+</span> ee2_num, <span class="at">data =</span> data_filtrada) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Modelo 3 –&gt; Regresión lineal múltiple (ingresos + interés por estudiar + sexo)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>modelo_3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(a1_num <span class="sc">~</span> a7_num <span class="sc">+</span> ee2_num <span class="sc">+</span> <span class="fu">factor</span>(sg01_num), <span class="at">data =</span> data_filtrada) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Tabla de modelos de regresión</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tab_model</span>(modelo_1, modelo_2, modelo_3,</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.ci =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">show.std =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"Modelos de regresión: factores asociados a la satisfacción con la vida"</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">dv.labels =</span> <span class="fu">c</span>(<span class="st">"Modelo 1: Solo ingresos"</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Modelo 2: Ingresos + interés por estudiar"</span>,</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Modelo 3: Ingresos + interés + sexo"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Modelos de regresión: factores asociados a la satisfacción con la vida</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">&nbsp;</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Modelo 1: Solo ingresos</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Modelo 2: Ingresos + interés por estudiar</td>
+<td colspan="3" data-quarto-table-cell-role="th" style="text-align: center; border-top: double; font-style: normal; font-weight: bold; padding: 0.2cm;">Modelo 3: Ingresos + interés + sexo</td>
+</tr>
+<tr class="even">
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Predictors</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">std. Beta</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">p</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">Estimates</td>
+<td style="text-align: center; border-bottom: 1px solid; font-style: italic; font-weight: normal;">std. Beta</td>
+<td style="text-align: center;">p</td>
+<td style="text-align: center;">Estimates</td>
+<td style="text-align: center;">std. Beta</td>
+<td style="text-align: center;">p</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">(Intercept)</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.14</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.00</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">3.30</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.00</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+<td style="text-align: center;">3.30</td>
+<td style="text-align: center;">-0.01</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">a 7.¿Cuán satisfecho(a)o<br>
+insatisfecho(a)está usted<br>
+con sus ingresos?</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.26</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.34</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"><strong>&lt;0.001</strong></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.26</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">0.34</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+<td style="text-align: center;">0.26</td>
+<td style="text-align: center;">0.34</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">ee 2.¿Tiene Ud interés en<br>
+estudiar o seguir<br>
+estudiando en los<br>
+próximos 5 años?</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.11</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">-0.06</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+<td style="text-align: center;">-0.11</td>
+<td style="text-align: center;">-0.06</td>
+<td style="text-align: center;"><strong>&lt;0.001</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;">factor(sg01_num)2</td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: left; padding: 0.2cm; vertical-align: top;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">0.587</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">Observations</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">11039</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">11039</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm; border-top: 1px solid;">11039</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.117 / 0.117</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.120 / 0.120</td>
+<td colspan="3" style="text-align: left; padding: 0.2cm; vertical-align: top; padding-top: 0.1cm; padding-bottom: 0.1cm;">0.120 / 0.120</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>##Gráfico de valores predichos de modelo 2 de regresión</p>
+<p># Crear nueva variable con valores predichos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>data_filtrada<span class="sc">$</span>pred_modelo_2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Gráficamos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_filtrada, <span class="fu">aes</span>(<span class="at">x =</span> a7_num, <span class="at">y =</span> pred_modelo_2)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Predicción Modelo 2"</span>,</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Satisfacción con los ingresos"</span>,</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Satisfacción con la vida (V.predicho)"</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>) <span class="sc">+</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>)),</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">r =</span> <span class="dv">10</span>))</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Trabajo1JoseySeba_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="resultados" class="level3">
 <h3 class="anchored" data-anchor-id="resultados">Resultados</h3>
@@ -684,8 +843,35 @@ Adjuntando el paquete: 'kableExtra'</code></pre>
 <p>La distribución está centrada entre 5 y 8, lo cual indicia que la mayoría de las personas se concentra en los valores intermedios-altos del índice. Los valores más frecuentes son 5 y 7, lo que sugiere una percepción general moderadamente positiva del bienestar subjetivo.</p>
 <p>Por otro lado, aunque la curva no es perfectamente simétrica, no hay un sesgo fuerte hacia extremos bajos o altos. Esto indica que la mayoría de las personas no se encuentra ni muy insatisfecha ni completamente satisfecha, sino en un punto medio con cierta inclinación hacia niveles más positivos.</p>
 <p>Por último, en cuanto a los casos extremos, se pueden apreciar muy pocos. Los casos con valores de 2, 3 o 10, evidencia que tanto la insatisfacción extrema como la satisfacción máxima no son comunes en esta muestra.</p>
-
 </section>
+</section>
+<section id="interpretación-de-tabla-de-modelos-de-regresión" class="level3">
+<h3 class="anchored" data-anchor-id="interpretación-de-tabla-de-modelos-de-regresión">Interpretación de tabla de modelos de regresión</h3>
+<p><img src="images/Captura%20de%20pantalla%202025-06-09%20102644.png" class="img-fluid"></p>
+<p>En la tabla se presentan tres modelos de regresión lineal estimados con el objetivo de identificar los factores que inciden en la satisfacción con la vida de las personas. La variable dependiente en los tres modelos es a1_num, que mide la satisfacción general con la vida en una escala de 1 (muy insatisfecho) a 5 (muy satisfecho). Cada modelo incorpora progresivamente nuevas variables explicativas.</p>
+<p>Respecto al modelo 1, el predictor es a7_num (satisfacción con los ingresos), su coeficiente es 0.26 y la significación es p &lt; 0.001.</p>
+<p>A modo de interpretación se puede decir que existe una asociación positiva significativa entre satisfacción con los ingresos y satisfacción con la vida. Por cada punto que aumenta la satisfacción con los ingresos, la satisfacción con la vida aumenta en promedio 0.26 puntos.<br>
+El R² es igual a 0.117, lo cual indica que el modelo explica un 11.7% de la varianza en la satisfacción con la vida.</p>
+<p>Por otro lado, respecto al modelo 2, El primer predictor es a7_num y su coeficiente se mantiene igual (0.26), al igual que la significación (p &lt; 0.001). El segundo predictor es ee2_num, su coeficiente es -0.11 y la significación es p &lt; 0.001.</p>
+<p>A modo de interpretación, se puede decir que a igualdad de ingresos, quienes no desean seguir estudiando reportan una ligeramente mayor satisfacción con la vida, lo que puede relacionarse con menos presión académica o expectativas frustradas.</p>
+<p>El R² es igual a 0.120. Lo anterior quiere decir que aumenta apenas la capacidad explicativa del modelo respecto al anterior.</p>
+<p>Por ultimo, respecto al modelo 3, los predictores se mantienen igual, solo se le agrega un nuevo predictor que es factor(sg01_num)2. El coeficiente es 0.01 y el valor p es igual a 0.587, el cual no es significativo.</p>
+<p>A modo de intepretación, se puede decir que el sexo no tiene un efecto estadisticamente significativo sobre la satisfacción con la vida cuando se controla por ingresos o el interes por seguir estudiando. Al igual que en el modelo 2, el R² es igual a 0.120.</p>
+<p>A partir de las hipotesis propuestas al comienzo de este trabajo se puede decir que la hipotesis 1:</p>
+<p><em>“A mayor satisfacción con el nivel de ingresos, mayor será la satisfacción general con la vida.”</em></p>
+<p>Se confirma en los tres modelos. La satisfacción con los ingresos es el factor más importante, con un efecto positivo, consistente y significativo.</p>
+<p>En cuanto a la hipotesis 2;</p>
+<p><em>“La satisfacción con la vida también está influida por el interés en seguir estudiando y por el sexo.”</em></p>
+<p>Se podría decir que está parcialmente confirmada, ya que el interés en estudiar muestra un efecto significativo, pero negativo: quienes no quieren seguir estudiando reportan mayor satisfacción. Por otra parte, el sexo no tiene efecto significativo, por lo tanto no aporta capacidad explicativa adicional al modelo.</p>
+<p>A modo de conclusión, los resultados del análisis de regresión permiten confirmar que la satisfacción con los ingresos es un determinante solido del bienestar subjetivo. El interés por estudiar también influye, pero de forma inversa a lo esperado, y el sexo no tiene impacto significativo. Esto sugiere que, más allá de características sociodemográficas, las percepciones de logro económico y aspiraciones educativas juegan un rol más relevante en la valoración que las personas hacen de su vida.</p>
+</section>
+<section id="gráfico-de-valores-predichos-del-modelo-2" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-de-valores-predichos-del-modelo-2">Gráfico de valores predichos del modelo 2</h3>
+<p><img src="images/Gráfico%20de%20valores%20predichos%20modelo%202,oficial-01.png" class="img-fluid"></p>
+<p>El gráfico muestra los valores predichos por el modelo 2 para la variable satisfacción con la vida, en función de los niveles de satisfacción con los ingresos.</p>
+<p>Se observa una relación lineal positiva clara: a medida que las personas reportan mayor satisfacción con sus ingresos (de 1 a 5), el modelo predice un aumento en su nivel de satisfacción con la vida.</p>
+<p>La línea roja representa la pendiente estimada por el modelo, mientras que los puntos azules muestran los valores predichos individuales. Al observar el gráfico, podemos confirmar empíricamente la hipótesis 1, la cual postula que los ingresos percibidos influyen significativamente en el bienestar subjetivo.</p>
+
 </section>
 </section>
 
