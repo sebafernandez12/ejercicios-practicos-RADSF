@@ -172,6 +172,47 @@ ggplot(data_filtrada, aes(x = indice_satisfaccion)) +
     axis.title.x = element_text(margin = margin(t = 10)),
     axis.title.y = element_text(margin = margin(r = 10))
   ) 
+##Estimamos modelos de regresión lineal y modelos de regresión multiple
+# Modelo 1: Regresión lineal simple
+modelo_1 <- lm(a1_num ~ a7_num, data = data_filtrada)
+
+# Modelo 2: Regresión lineal múltiple
+modelo_2 <- lm(a1_num ~ a7_num + ee2_num, data = data_filtrada) 
+
+# Modelo 3: Regresión lineal múltiple (ingresos + interés por estudiar + sexo)
+modelo_3 <- lm(a1_num ~ a7_num + ee2_num + factor(sg01_num), data = data_filtrada) 
+
+
+##Tabla de modelo de regresiones
+tab_model(modelo_1, modelo_2, modelo_3,
+          show.ci = FALSE,
+          show.std = TRUE,
+          title = "Modelos de regresión: factores asociados a la satisfacción con la vida",
+          dv.labels = c("Modelo 1: Solo ingresos",
+                        "Modelo 2: Ingresos + interés por estudiar",
+                        "Modelo 3: Ingresos + interés + sexo")) 
+##Gráfico de valores predichos de modelo 2 de regresión
+# Crear nueva variable con valores predichos
+data_filtrada$pred_modelo_2 <- predict(modelo_2) 
+##Graficamos 
+ggplot(data_filtrada, aes(x = a7_num, y = pred_modelo_2)) +
+  geom_jitter(alpha = 0.2, width = 0.2, color = "darkblue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(
+    title = "Predicción Modelo 2",
+    x = "Satisfacción con los ingresos",
+    y = "Satisfacción con la vida (V.predicho)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 13, face = "bold"),
+    axis.title.x = element_text(margin = margin(t = 10)),
+    axis.title.y = element_text(margin = margin(r = 10))
+  ) 
+
+
+
+
 
 
 

@@ -3,9 +3,9 @@
     "path": "C:/Users/Sebastián Fernández/OneDrive/Desktop/OPT R, TRABAJOS/ejercicios-practicos-RADSF/Trabajo1OPTRJYS/PROC/PREPARACION.R",
     "project_path": "PROC/PREPARACION.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "3802826987",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1744731160718.0,
     "source_on_save": true,
     "relative_order": 1,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "206,4",
-        "scrollLine": "0"
+        "cursorPosition": "157,0",
+        "scrollLine": "145"
     },
     "folds": "",
-    "lastKnownWriteTime": 1747241137,
+    "lastKnownWriteTime": 1749490151,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1749481875000,
+    "last_content_update": 1749490151,
     "read_only": false,
     "read_only_alternatives": []
 }

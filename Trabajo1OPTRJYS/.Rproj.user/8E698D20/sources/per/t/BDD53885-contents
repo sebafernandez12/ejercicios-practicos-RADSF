@@ -280,6 +280,8 @@ ggcorrplot(cor_matrix,
              theme(plot.title = element_text(hjust = 0.5))) 
 ```
 
+La decisión de construir un indice sumativo se fundamenta en que el bienestar subjetivo puede abordarse desde una perspectiva multidimensional que integra componentes afectivos y cognitivos, incluyendo variables como la satisfacción con la vida, los ingresos y otros aspectos personales[@moyanodíaz2007]. Dicho lo anterior, en este enfoque tiene sentido construir un índice sumativo que integre distintas dimensiones (objetivas y subjetivas) de la satisfacción personal, ya que esto permite una aproximación más global a la experiencia del bienestar desde la percepción individual.
+
 ##Indice sumativo entre satisfacción con la vida e ingresos
 
 ```{r}
@@ -471,9 +473,9 @@ Se podría decir que está parcialmente confirmada, ya que el interés en estudi
 
 A modo de conclusión, los resultados del análisis de regresión permiten confirmar que la satisfacción con los ingresos es un determinante solido del bienestar subjetivo. El interés por estudiar también influye, pero de forma inversa a lo esperado, y el sexo no tiene impacto significativo. Esto sugiere que, más allá de características sociodemográficas, las percepciones de logro económico y aspiraciones educativas juegan un rol más relevante en la valoración que las personas hacen de su vida.
 
-### Gráfico de valores predichos del modelo 2 
+### Gráfico de valores predichos del modelo 2
 
-![](images/Gráfico de valores predichos modelo 2,oficial-01.png)
+![](images/Gráfico%20de%20valores%20predichos%20modelo%202,oficial-01.png)
 
 El gráfico muestra los valores predichos por el modelo 2 para la variable satisfacción con la vida, en función de los niveles de satisfacción con los ingresos.
 
