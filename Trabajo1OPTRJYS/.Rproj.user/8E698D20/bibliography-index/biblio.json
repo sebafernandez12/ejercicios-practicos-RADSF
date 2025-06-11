@@ -97,6 +97,35 @@
             "title": "Estudio Exploratorio de Factores que Influyen en la Decisión de la Mujer para Estudiar Ingeniería en Chile",
             "type": "article-journal",
             "volume": "30"
+        },
+        {
+            "DOI": "10.4067/S0718-23762007000200012",
+            "URL": "http://www.scielo.cl/scielo.php?script=sci_arttext&pid=S0718-23762007000200012&lng=en&nrm=iso&tlng=en",
+            "author": [
+                {
+                    "family": "Moyano Díaz",
+                    "given": "Emilio"
+                },
+                {
+                    "family": "Ramos Alvarado",
+                    "given": "Nadia"
+                }
+            ],
+            "container-title": "Universum (Talca)",
+            "id": "moyanodíaz2007",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007
+                    ]
+                ]
+            },
+            "language": "en",
+            "title": "Bienestar subjetivo: midiendo satisfacción vital, felicidad y salud en población chilena de la Región Maule",
+            "title-short": "Bienestar subjetivo",
+            "type": "article-journal",
+            "volume": "22"
         }
     ],
     "project_biblios": []

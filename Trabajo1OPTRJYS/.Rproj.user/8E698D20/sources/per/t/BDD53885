@@ -3,7 +3,7 @@
     "path": "C:/Users/Sebastián Fernández/OneDrive/Desktop/OPT R, TRABAJOS/ejercicios-practicos-RADSF/Trabajo1OPTRJYS/PROC/Trabajo1JoseySeba.qmd",
     "project_path": "PROC/Trabajo1JoseySeba.qmd",
     "type": "quarto_markdown",
-    "hash": "1124262451",
+    "hash": "3014194052",
     "contents": "",
     "dirty": false,
     "created": 1744731199205.0,
@@ -19,14 +19,14 @@
         "scrollLine": "0",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "12331:0"
+        "rmdVisualModeLocation": "15300:8463.63671875"
     },
     "folds": "",
-    "lastKnownWriteTime": 1749670028,
+    "lastKnownWriteTime": 1749670396,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1749670028718,
+    "last_content_update": 1749670396355,
     "read_only": false,
     "read_only_alternatives": []
 }
