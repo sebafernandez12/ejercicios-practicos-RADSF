@@ -402,7 +402,7 @@ La mayoría de las personas declara estar “satisfecha” (57,1%) o “muy sati
 
 Los niveles de insatisfacción con los ingresos son altos: el 35% se declara “insatisfecho” y un 11,7% “muy insatisfecho”. En el gráfico se aprecia que las mujeres declaran insatisfacción con mayor frecuencia que los hombres, y también tienen una menor proporción en la categoría “muy satisfecha”. Esto sugiere una mayor percepción de precariedad económica entre las mujeres, lo cual se alinea con la literatura sobre desigualdad salarial de género.
 
-#### Tabla y gráfico de interes por seguir estudiando según sexo
+Tabla y gráfico de interes por seguir estudiando según sexo
 
 ![](images/Tabla_seguir_estudiando.png){width="333"}
 
@@ -424,7 +424,7 @@ La distribución está relativamente equilibrada: 48,5% declara interés por seg
 
 3.  **Correlación entre satisfacción con los ingresos e interés por estudiar\
     **Valor: 0.00**\
-    **Interpretación: No existe una relación significativa entre estas dos variables, lo que implica que la satisfacción con el ingreso actual no se relaciona con la motivación o deseo de continuar estudiando.\
+    **Interpretación: No existe una relación significativa entre estas dos variables, lo que implica que la satisfacción con el ingreso actual no se relaciona con la motivación o deseo de continuar estudiando.
 
     ### Indice sumativo de satisfacción subjetiva
 
