@@ -126,6 +126,44 @@
             "title-short": "Bienestar subjetivo",
             "type": "article-journal",
             "volume": "22"
+        },
+        {
+            "DOI": "10.4067/S0718-65682018000100153",
+            "URL": "http://www.scielo.cl/scielo.php?script=sci_arttext&pid=S0718-65682018000100153&lng=en&nrm=iso&tlng=en",
+            "author": [
+                {
+                    "family": "Gallardo-Peralta",
+                    "given": "Lorena"
+                },
+                {
+                    "family": "Córdova Jorquera",
+                    "given": "Isabel"
+                },
+                {
+                    "family": "Piña Morán",
+                    "given": "Marcelo"
+                },
+                {
+                    "family": "Urrutia Quiroz",
+                    "given": "Beatriz"
+                }
+            ],
+            "container-title": "Polis (Santiago)",
+            "id": "gallardo-peralta2018",
+            "issue": "49",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018,
+                        5
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "153-175",
+            "title": "Diferencias de género en salud y calidad de vida en personas mayores del norte de Chile",
+            "type": "article-journal",
+            "volume": "17"
         }
     ],
     "project_biblios": []
